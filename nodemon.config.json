@@ -1,0 +1,15 @@
+{
+  "watch": [
+    "src/server",
+    "src/shared"
+  ],
+  "ext": "ts",
+  "env": {
+    "TS_NODE_PROJECT": "src/server/tsconfig.json"
+  },
+  "ignore": ["src/**/*.spec.ts"],
+  "exec": "node --inspect=0.0.0.0 --require ts-node/register src/server/src/index.ts",
+  "events": {
+    "start": "yarn gen-swagger"
+  }
+}

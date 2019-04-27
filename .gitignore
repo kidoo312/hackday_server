@@ -1,0 +1,26 @@
+# etc
+.DS_Store
+
+# dependencies
+node_modules/
+
+# logs
+*.log
+logs/
+npm*.log
+
+# test
+.cache/
+coverage
+*.xml
+
+# build
+.out/
+eslint/
+build/
+dist/
+
+# IntelliJ IDEA generated files
+.idea/
+*.iml
+

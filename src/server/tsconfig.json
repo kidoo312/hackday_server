@@ -1,0 +1,15 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "module": "commonjs",                     /* Specify module code generation: 'none', commonjs', 'amd', 'system', 'umd', 'es2015', or 'ESNext'. */
+    "lib": [                                  /* Specify library files to be included in the compilation:  */
+      "es2017",
+      "dom"
+    ],
+    "sourceMap": true,                        /* Generates corresponding '.map' file. */
+    "rootDir": "../",
+    "outDir": "../../dist",                   /* Redirect output structure to the directory. */
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true
+  }
+}
