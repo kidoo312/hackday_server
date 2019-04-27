@@ -1,3 +1,3 @@
-# hackday mock server
+# Hackday mock server
 
 작업 중.

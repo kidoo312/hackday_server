@@ -80,7 +80,7 @@ app.use('/api', apis);
  * swagger 설정.
  */
 const swaggerUiOptions = {
-    customSiteTitle: 'CRUX-APP Docs',
+    customSiteTitle: 'SSP Server Docs',
 };
 Server.swagger(app, {
     endpoint: 'api-docs',

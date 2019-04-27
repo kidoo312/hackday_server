@@ -3,11 +3,13 @@
  */
 export interface SizeModel {
     /**
+     * 너비값.
      * @IsInt
      */
     width: number;
 
     /**
+     * 높이값.
      * @IsInt
      */
     height: number;
