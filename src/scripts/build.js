@@ -13,13 +13,17 @@ const shell = (cmd) => {
 
 const distRootPath = path.join(__dirname, '../../dist');
 const serverPath = path.join(__dirname, '../server');
-const serverDistPath = path.join(__dirname, '../../dist/server/src');
+const serverDistPath = path.join(__dirname, '../../dist/server');
 
 console.log(`> ${chalk.blue('production build start')}`);
 
 shell(`rm -rf ${distRootPath}`);
-spawn('tsc', ['-p', serverPath])
+console.log(`> ${chalk.green('generate swagger file')}`);
+spawn('yarn', ['gen-swagger'])
     .on('close', () => {
-        console.log(`> ${chalk.green('server build complete')}`);
-        shell(`cp -R ${serverPath}/src/environments ${serverDistPath}/environments`);
+        spawn('tsc', ['-p', serverPath])
+            .on('close', () => {
+                console.log(`> ${chalk.green('server build complete')}`);
+                shell(`cp -R ${serverPath}/environments ${serverDistPath}/environments`);
+            });
     });

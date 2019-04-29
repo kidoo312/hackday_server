@@ -6,9 +6,9 @@ import * as nconf from 'nconf';
 import {
     logger,
     base64Helper,
-} from '../../libs';
-import { AdRequestCommandModel, AdRequestResultModel } from '../../../../shared/model';
-import { AdProviderEnum } from '../../../../shared/enum';
+} from '../../libs/index';
+import { AdRequestCommandModel, AdRequestResultModel } from '../../../shared/model';
+import { AdProviderEnum } from '../../../shared/enum';
 
 export const getAdRequest = async (command: AdRequestCommandModel): Promise<AdRequestResultModel> => {
     const requestId = moment().millisecond().toString();

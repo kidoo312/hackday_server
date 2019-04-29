@@ -4,8 +4,8 @@
 import { GET, Path, Errors, QueryParam } from 'typescript-rest';
 import { IsInt, Tags } from 'typescript-rest-swagger';
 import { AdRequestService } from '../../../services';
-import { AdRequestCommandModel, AdRequestResultModel } from '../../../../../shared/model';
-import { GenderEnum } from '../../../../../shared/enum';
+import { AdRequestCommandModel, AdRequestResultModel } from '../../../../shared/model';
+import { GenderEnum } from '../../../../shared/enum';
 
 @Path('/ad-request')
 export class AdRequestController {

@@ -84,7 +84,7 @@ const swaggerUiOptions = {
 };
 Server.swagger(app, {
     endpoint: 'api-docs',
-    filePath: path.join(__dirname, '../../../dist/swagger.yaml'),
+    filePath: path.join(__dirname, '../../dist/swagger.yaml'),
     host: `localhost:${port}`,
     schemes: ['http'],
     swaggerUiOptions: swaggerUiOptions

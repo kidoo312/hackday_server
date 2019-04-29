@@ -8,7 +8,7 @@
     "gen-swagger": "swaggerGen -c swagger.config.json",
     "nodemon": "nodemon --config nodemon.config.json",
     "build": "node src/scripts/build.js",
-    "serve": "NODE_ENV=prod PORT=4200 node dist/server/src/index.js"
+    "serve": "NODE_ENV=production PORT=4200 node dist/server/index.js"
   },
   "license": "MIT",
   "dependencies": {
