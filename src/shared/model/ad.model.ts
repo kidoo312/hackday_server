@@ -11,6 +11,11 @@ export interface AdModel {
     adProviderName: AdProviderEnum;
 
     /**
+     * 해당 광고의 정보를 담은 encrypted 값.
+     */
+    encryptedInfo: string;
+
+    /**
      * 요청 사이즈 목록.
      */
     requestSizes: Array<SizeModel>;

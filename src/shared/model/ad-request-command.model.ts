@@ -10,6 +10,11 @@ export interface AdRequestCommandModel {
     adUnitId: string;
 
     /**
+     * ad id.
+     */
+    adId: string;
+
+    /**
      * 성별.
      */
     gender?: GenderEnum;
