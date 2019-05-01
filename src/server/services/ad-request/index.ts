@@ -40,7 +40,7 @@ export const getAdRequest = async (command: AdRequestCommandModel): Promise<AdRe
                 requestSizes: [
                     { width: 320, height: 100 },
                 ],
-                adUnitId: 'IMG_16_9_LINK',
+                adUnitId: 'ca-app-pub-3940256099942544/6300978111'
             },
             {
                 adProviderName: AdProviderEnum.FACEBOOK_AUDIENCE_NETWORK,
@@ -48,8 +48,10 @@ export const getAdRequest = async (command: AdRequestCommandModel): Promise<AdRe
                 requestSizes: [
                     { width: 320, height: 100 },
                 ],
-                adUnitId: 'ca-app-pub-3940256099942544/6300978111'
+                adUnitId: 'IMG_16_9_LINK#YOUR_PLACEMENT_ID',
             },
         ],
     } as AdRequestResultModel;
+
+    // FACEBOOK IMG_16_9_APP_INSTALL, IMG_16_9_LINK 둘 중에 하
 };
