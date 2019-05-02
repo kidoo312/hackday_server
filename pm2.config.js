@@ -1,7 +1,7 @@
 module.exports = {
     apps: [{
         name: 'ssp_server',
-        script: './dist/server/src/index.js',
+        script: './dist/server/index.js',
         watch: false,
         env: {
           "NODE_ENV": "production",
