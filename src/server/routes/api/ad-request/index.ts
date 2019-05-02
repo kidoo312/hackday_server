@@ -33,7 +33,7 @@ export class AdRequestController {
                 yob
             };
 
-            return await AdRequestService.getAdRequest(command);
+            return await AdRequestService.getAdRequestResult(command);
         } catch (err) {
             throw new Errors.InternalServerError(err);
         }

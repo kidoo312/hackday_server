@@ -4,4 +4,5 @@
 export enum AdProviderEnum {
     FACEBOOK_AUDIENCE_NETWORK = 'FAN',
     GOOGLE_AD_MANAGER = 'AD_MANAGER',
+    MOPUB = 'MOPUB',
 }
