@@ -1,2 +1,2 @@
-eventTracker:
-  url: http://localhost4201/et
+server:
+  url: localhost

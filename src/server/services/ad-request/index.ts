@@ -143,14 +143,15 @@ const createAds = (requestId: number, adUnitId: string, adId: string): Array<AdM
 export const getAdRequestResult = async (command: AdRequestCommandModel): Promise<AdRequestResultModel> => {
     const requestId = Date.now();
     const {adId, adUnitId} = command;
+    const eventTrackingUrl = `http://${nconf.get('server').url}:${nconf.get('port')}/et`;
 
     return {
         requestId: requestId.toString(),
         eventTracking: {
-            ackImpressionUrl: `${nconf.get('eventTracker').url}/s1`,
-            activeViewImpressionUrl: `${nconf.get('eventTracker').url}/s2`,
-            clickUrl: `${nconf.get('eventTracker').url}/s3`,
-            errorUrl: `${nconf.get('eventTracker').url}/s99`,
+            ackImpressionUrl: `${eventTrackingUrl}/s1`,
+            activeViewImpressionUrl: `${eventTrackingUrl}/s2`,
+            clickUrl: `${eventTrackingUrl}/s3`,
+            errorUrl: `${eventTrackingUrl}/s99`,
         },
         ads: createAds(requestId, adUnitId, adId),
     } as AdRequestResultModel;

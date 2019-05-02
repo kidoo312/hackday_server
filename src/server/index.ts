@@ -85,7 +85,7 @@ const swaggerUiOptions = {
 Server.swagger(app, {
     endpoint: 'api-docs',
     filePath: path.join(__dirname, '../../dist/swagger.yaml'),
-    host: `localhost:${port}`,
+    host: `${nconf.get('server').url}:${port}`,
     schemes: ['http'],
     swaggerUiOptions: swaggerUiOptions
 });
