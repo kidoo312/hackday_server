@@ -35,6 +35,7 @@ export class AdRequestController {
 
             return await AdRequestService.getAdRequestResult(command);
         } catch (err) {
+
             throw new Errors.InternalServerError(err);
         }
     }

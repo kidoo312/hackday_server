@@ -1,7 +1,6 @@
 /**
  * Created by kidoo.han on 27/04/2019
  */
-import * as httpErrors from 'http-errors';
 import logger from './log4js';
 
 /**
@@ -26,14 +25,6 @@ process.on('uncaughtException', (err) => {
  * @param next
  */
 export default function errorHandler(err, req, res, next) {
-    let statusCode = 500;
-    if (err instanceof httpErrors.HttpError) {
-        statusCode = err.statusCode;
-    }
-
-    if (statusCode === 401) {
-        res.redirect('/401');
-    } else {
-        logger.error(err.stack);
-    }
+    res.status(500);
+    logger.error(err.stack);
 }

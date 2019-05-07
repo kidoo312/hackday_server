@@ -74,7 +74,12 @@ app.use(morgan);
  */
 const apis = express.Router();
 Server.buildServices(apis, ...apiController);
-app.use('/api', apis);
+try {
+    app.use('/api', apis);
+} catch (err) {
+    console.log('000000000');
+}
+
 
 /*
  * swagger 설정.

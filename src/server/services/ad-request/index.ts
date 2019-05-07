@@ -28,6 +28,12 @@ const FAN_CANDIDATE_AD_UNIT_IDS = [
     'IMG_16_9_LINK',
 ];
 
+// 사용가능한 AdUnitId 목
+const AVAILABLE_AD_UNID_IDS = [
+    'HACKDAY_IOS',
+    'HACKDAY_AOS',
+];
+
 /**
  * google ad 정보 생성.
  * @param requestId 해당 요청에 대한 ID.
@@ -87,28 +93,10 @@ const createFanRequestSize = (requestId: number): SizeModel => {
     return FAN_CANDIDATE_SIZES[requestId % FAN_CANDIDATE_SIZES.length];
 };
 
-/**
- * mopub ad 정보 생성.
- * @param requestId 해당 요청에 대한 ID.
- * @param adUnitId 해당 요청의 AdUnitId.
- * @param adId 기기의 adId.
- */
-const createMopubAd = (requestId: number, adUnitId: string, adId: string): AdModel => {
-    const mopubPlainText = `requestId=${requestId}&adUnitId=${adUnitId}&adId=${adId}&adProviderName=${AdProviderEnum.MOPUB}`;
-    const mopubEncrypted = base64Helper.encode(mopubPlainText);
-    return {
-        adProviderName: AdProviderEnum.MOPUB,
-        encryptedInfo: mopubEncrypted,
-        requestSizes: [{width: 320, height: 50}],
-        adUnitId: 'b195f8dd8ded45fe847ad89ed1d016da',
-    };
-};
-
 // demand 별 광고 정보 생성 함수 목록.
 const CREATE_AD_FUNCTIONS = [
     createGoogleAd,
     createFanAd,
-    createMopubAd,
 ];
 
 /**
@@ -119,7 +107,6 @@ const CREATE_AD_FUNCTIONS = [
  */
 const createAds = (requestId: number, adUnitId: string, adId: string): Array<AdModel> => {
     const demandCount = requestId % (CREATE_AD_FUNCTIONS.length) + 1;
-
     const tCreateAdFunctions = _.cloneDeep(CREATE_AD_FUNCTIONS);
     const retAds: Array<AdModel> = [];
 
@@ -141,8 +128,17 @@ const createAds = (requestId: number, adUnitId: string, adId: string): Array<AdM
  * @param command 광고 정보 요청에 대한 command 객체.
  */
 export const getAdRequestResult = async (command: AdRequestCommandModel): Promise<AdRequestResultModel> => {
-    const requestId = Date.now();
     const {adId, adUnitId} = command;
+
+    if ( !adId ) {
+        throw new Error("invalid ad id.");
+    }
+
+    if ( !_.includes(AVAILABLE_AD_UNID_IDS, adUnitId) ) {
+        throw new Error("invalid ad unit id.");
+    }
+
+    const requestId = Date.now();
     const eventTrackingUrl = `http://${nconf.get('server').url}:${nconf.get('port')}/et`;
 
     return {
