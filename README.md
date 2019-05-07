@@ -3,7 +3,7 @@
 ## Requirement
 
 #### Windows 환경인 경우 하단과 같이 bash 세팅을 우선 진행
->Tip: [Windows OS 환경에서 bash 세팅하기](https://oss.navercorp.com/RogueOne/ad-tech/issues/16)
+>Tip: [Windows OS 환경에서 bash 세팅하기](https://github.com/kidoo312/hackday_server/issues/1)
 
 #### Install nvm
 ```sh
