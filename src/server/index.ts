@@ -80,6 +80,7 @@ try {
     console.log('000000000');
 }
 
+app.use('/static', express.static(__dirname + '/public'));
 
 /*
  * swagger 설정.

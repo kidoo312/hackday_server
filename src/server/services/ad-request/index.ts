@@ -3,10 +3,7 @@
  */
 import * as _ from 'lodash';
 import * as nconf from 'nconf';
-import {
-    logger,
-    base64Helper,
-} from '../../libs/index';
+import { base64Helper, logger, } from '../../libs/index';
 import { AdModel, AdRequestCommandModel, AdRequestResultModel, SizeModel } from '../../../shared/model';
 import { AdProviderEnum } from '../../../shared/enum';
 
@@ -28,7 +25,14 @@ const FAN_CANDIDATE_AD_UNIT_IDS = [
     'IMG_16_9_LINK',
 ];
 
-// 사용가능한 AdUnitId 목
+// naver 관련 상수
+const NAVER_CANDIDATE_SIZES: Array<SizeModel> = [
+    {width: 320, height: 50},
+    {width: 320, height: 100},
+    {width: 300, height: 250},
+];
+
+// 사용가능한 AdUnitId 목록
 const AVAILABLE_AD_UNID_IDS = [
     'HACKDAY_IOS',
     'HACKDAY_AOS',
@@ -93,10 +97,37 @@ const createFanRequestSize = (requestId: number): SizeModel => {
     return FAN_CANDIDATE_SIZES[requestId % FAN_CANDIDATE_SIZES.length];
 };
 
+const createNaverAd = (requestId: number, adUnitId: string, adId: string): AdModel => {
+    const naverPlainText = `requestId=${requestId}&adUnitId=${adUnitId}&adId=${adId}&adProviderName=${AdProviderEnum.NAVER}`;
+    const naverEncrypted = base64Helper.encode(naverPlainText);
+    const naverRequestSize = createNaverRequestSize(requestId);
+    return {
+        adProviderName: AdProviderEnum.NAVER,
+        encryptedInfo: naverEncrypted,
+        requestSizes: [naverRequestSize],
+        adm: `
+<html>
+
+<body style="margin: 0; padding: 0">
+    <a data-ssp="clk" href="https://www.naver.com" style="display:block;max-width:414px;margin:0 auto;" target="_top"> 
+    <img src="http://${nconf.get('server').url}:${nconf.get('port')}/static/images/${naverRequestSize.width}x${naverRequestSize.height}.png" alt="" data-content-type="image" style="width:100%;height:auto;vertical-align: top;border:none" /> 
+    </a>
+</body>
+
+</html>
+        `,
+    }
+};
+
+const createNaverRequestSize = (requestId: number): SizeModel => {
+    return NAVER_CANDIDATE_SIZES[requestId % NAVER_CANDIDATE_SIZES.length];
+};
+
 // demand 별 광고 정보 생성 함수 목록.
 const CREATE_AD_FUNCTIONS = [
     createGoogleAd,
     createFanAd,
+    createNaverAd,
 ];
 
 /**
