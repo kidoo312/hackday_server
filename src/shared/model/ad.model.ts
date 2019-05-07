@@ -1,7 +1,7 @@
 /**
  * Created by kidoo.han on 28/04/2019
  */
-import { AdProviderEnum } from '../enum';
+import { AdProviderEnum, ConnectionTypeEnum } from '../enum';
 import { SizeModel } from './size.model';
 
 export interface AdModel {
@@ -21,7 +21,12 @@ export interface AdModel {
     requestSizes: Array<SizeModel>;
 
     /**
-     * demend 의 광고 유닛 아이디.
+     * Connection type
+     */
+    connectionType: ConnectionTypeEnum;
+
+    /**
+     * demand 의 광고 유닛 아이디.
      * c2s 전용.
      */
     adUnitId?: string;

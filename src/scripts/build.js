@@ -25,5 +25,6 @@ spawn('yarn', ['gen-swagger'])
             .on('close', () => {
                 console.log(`> ${chalk.green('server build complete')}`);
                 shell(`cp -R ${serverPath}/environments ${serverDistPath}/environments`);
+                shell(`cp -R ${serverPath}/public ${serverDistPath}/public`);
             });
     });

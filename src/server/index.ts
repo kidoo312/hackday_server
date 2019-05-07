@@ -74,12 +74,7 @@ app.use(morgan);
  */
 const apis = express.Router();
 Server.buildServices(apis, ...apiController);
-try {
-    app.use('/api', apis);
-} catch (err) {
-    console.log('000000000');
-}
-
+app.use('/api', apis);
 app.use('/static', express.static(__dirname + '/public'));
 
 /*

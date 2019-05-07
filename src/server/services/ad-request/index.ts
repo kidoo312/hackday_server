@@ -5,7 +5,7 @@ import * as _ from 'lodash';
 import * as nconf from 'nconf';
 import { base64Helper, logger, } from '../../libs/index';
 import { AdModel, AdRequestCommandModel, AdRequestResultModel, SizeModel } from '../../../shared/model';
-import { AdProviderEnum } from '../../../shared/enum';
+import { AdProviderEnum, ConnectionTypeEnum } from '../../../shared/enum';
 
 // google 관련 상수.
 const GOOGLE_CANDIDATE_SIZES: Array<SizeModel> = [
@@ -51,6 +51,7 @@ const createGoogleAd = (requestId: number, adUnitId: string, adId: string): AdMo
         adProviderName: AdProviderEnum.GOOGLE_AD_MANAGER,
         encryptedInfo: googleEncrypted,
         requestSizes: createGoogleRequestSizes(requestId),
+        connectionType: ConnectionTypeEnum.C2S,
         adUnitId: 'ca-app-pub-3940256099942544/6300978111',
     };
 };
@@ -85,6 +86,7 @@ const createFanAd = (requestId: number, adUnitId: string, adId: string): AdModel
         adProviderName: AdProviderEnum.FACEBOOK_AUDIENCE_NETWORK,
         encryptedInfo: fanEncrypted,
         requestSizes: [createFanRequestSize(requestId)],
+        connectionType: ConnectionTypeEnum.C2S,
         adUnitId: `${FAN_CANDIDATE_AD_UNIT_IDS[requestId % 2]}#YOUR_PLACEMENT_ID`,
     };
 };
@@ -105,6 +107,7 @@ const createNaverAd = (requestId: number, adUnitId: string, adId: string): AdMod
         adProviderName: AdProviderEnum.NAVER,
         encryptedInfo: naverEncrypted,
         requestSizes: [naverRequestSize],
+        connectionType: ConnectionTypeEnum.S2S,
         adm: `
 <html>
 

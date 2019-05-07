@@ -3,3 +3,4 @@
  */
 export * from './ad-provider.enum';
 export * from './gender.enum';
+export * from './connection-type.enum';
