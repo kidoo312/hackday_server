@@ -1,7 +1,7 @@
 /**
  * Created by kidoo.han on 27/04/2019
  */
-import { GenderEnum } from '../enum/gender.enum';
+import { GenderEnum } from '../enum';
 
 export interface AdRequestCommandModel {
     /**

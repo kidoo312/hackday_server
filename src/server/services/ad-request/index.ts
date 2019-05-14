@@ -50,7 +50,7 @@ const createGoogleAd = (requestId: number, adUnitId: string, adId: string): AdMo
     return {
         adProviderName: AdProviderEnum.GOOGLE_AD_MANAGER,
         encryptedInfo: googleEncrypted,
-        requestSizes: createGoogleRequestSizes(requestId),
+        requestSize: createGoogleRequestSize(requestId),
         connectionType: ConnectionTypeEnum.C2S,
         adUnitId: 'ca-app-pub-3940256099942544/6300978111',
     };
@@ -60,17 +60,8 @@ const createGoogleAd = (requestId: number, adUnitId: string, adId: string): AdMo
  * google 광고의 렌더링 사이즈 목록을 return.
  * @param requestId
  */
-const createGoogleRequestSizes = (requestId: number): Array<SizeModel> => {
-    const sizeCount = requestId % (GOOGLE_CANDIDATE_SIZES.length) + 1;
-    const tGoogleCandidateSizes: Array<SizeModel> = _.cloneDeep(GOOGLE_CANDIDATE_SIZES);
-    const retSizes: Array<SizeModel> = [];
-
-    for (let i = 0; i < sizeCount; i++) {
-        const pulledSizes: Array<SizeModel> = _.pullAt(tGoogleCandidateSizes, requestId % tGoogleCandidateSizes.length);
-        retSizes.push(...pulledSizes);
-    }
-
-    return retSizes;
+const createGoogleRequestSize = (requestId: number): SizeModel => {
+    return GOOGLE_CANDIDATE_SIZES[requestId % GOOGLE_CANDIDATE_SIZES.length];
 };
 
 /**
@@ -82,10 +73,11 @@ const createGoogleRequestSizes = (requestId: number): Array<SizeModel> => {
 const createFanAd = (requestId: number, adUnitId: string, adId: string): AdModel => {
     const fanPlainText = `requestId=${requestId}&adUnitId=${adUnitId}&adId=${adId}&adProviderName=${AdProviderEnum.FACEBOOK_AUDIENCE_NETWORK}`;
     const fanEncrypted = base64Helper.encode(fanPlainText);
+    const fanRequestSize = createFanRequestSize(requestId);
     return {
         adProviderName: AdProviderEnum.FACEBOOK_AUDIENCE_NETWORK,
         encryptedInfo: fanEncrypted,
-        requestSizes: [createFanRequestSize(requestId)],
+        requestSize: fanRequestSize,
         connectionType: ConnectionTypeEnum.C2S,
         adUnitId: `${FAN_CANDIDATE_AD_UNIT_IDS[requestId % 2]}#YOUR_PLACEMENT_ID`,
     };
@@ -106,7 +98,7 @@ const createNaverAd = (requestId: number, adUnitId: string, adId: string): AdMod
     return {
         adProviderName: AdProviderEnum.NAVER,
         encryptedInfo: naverEncrypted,
-        requestSizes: [naverRequestSize],
+        requestSize: naverRequestSize,
         connectionType: ConnectionTypeEnum.S2S,
         adm: `
 <html>

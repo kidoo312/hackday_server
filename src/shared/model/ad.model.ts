@@ -16,9 +16,9 @@ export interface AdModel {
     encryptedInfo: string;
 
     /**
-     * 요청 사이즈 목록.
+     * 요청 사이즈.
      */
-    requestSizes: Array<SizeModel>;
+    requestSize: SizeModel;
 
     /**
      * Connection type
