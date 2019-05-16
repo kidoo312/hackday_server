@@ -132,13 +132,13 @@ const CREATE_AD_FUNCTIONS = [
  * @param adId 기기의 adId.
  */
 const createAds = (requestId: number, adUnitId: string, adId: string): Array<AdModel> => {
-    const demandCount = requestId % (CREATE_AD_FUNCTIONS.length) + 1;
+    const demandCount = Math.floor(Math.random() * 100) % (CREATE_AD_FUNCTIONS.length) + 1;
     const tCreateAdFunctions = _.cloneDeep(CREATE_AD_FUNCTIONS);
     const retAds: Array<AdModel> = [];
 
     logger.info('------------------------------');
     for (let i = 0; i < demandCount; i++) {
-        const pulledFunctions = _.pullAt(tCreateAdFunctions, requestId % tCreateAdFunctions.length);
+        const pulledFunctions = _.pullAt(tCreateAdFunctions, (Math.floor(Math.random() * 100) + 1) % tCreateAdFunctions.length);
         const createdAd: AdModel = pulledFunctions[0](requestId, adUnitId, adId);
 
         logger.info(`requestId: ${requestId}, adId: ${adId}, adProvider: ${createdAd.adProviderName}, encrypted: ${createdAd.encryptedInfo}`);
