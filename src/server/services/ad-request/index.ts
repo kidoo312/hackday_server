@@ -38,6 +38,12 @@ const AVAILABLE_AD_UNID_IDS = [
     'HACKDAY_AOS',
 ];
 
+// encode 테스트시에 사용가능한 AdUnitId 목록
+const AVAILABLE_AD_UNID_IDS_TEST_ENCODE = [
+    '핵데이_아이폰',
+    '핵데이_안드로이드',
+];
+
 /**
  * google ad 정보 생성.
  * @param requestId 해당 요청에 대한 ID.
@@ -152,16 +158,23 @@ const createAds = (requestId: number, adUnitId: string, adId: string): Array<AdM
 /**
  * 광고 정보 요청에 대한 응답값 생성.
  * @param command 광고 정보 요청에 대한 command 객체.
+ * @param isTestEncode encode 테스트 여부
  */
-export const getAdRequestResult = async (command: AdRequestCommandModel): Promise<AdRequestResultModel> => {
+export const getAdRequestResult = async (command: AdRequestCommandModel, isTestEncode: boolean = false): Promise<AdRequestResultModel> => {
     const {adId, adUnitId} = command;
 
     if ( !adId ) {
         throw new Error("invalid ad id.");
     }
 
-    if ( !_.includes(AVAILABLE_AD_UNID_IDS, adUnitId) ) {
-        throw new Error("invalid ad unit id.");
+    if ( isTestEncode ) {
+        if ( !_.includes(AVAILABLE_AD_UNID_IDS_TEST_ENCODE, adUnitId) ) {
+            throw new Error("invalid ad unit id.");
+        }
+    } else {
+        if ( !_.includes(AVAILABLE_AD_UNID_IDS, adUnitId) ) {
+            throw new Error("invalid ad unit id.");
+        }
     }
 
     const requestId = Date.now();
